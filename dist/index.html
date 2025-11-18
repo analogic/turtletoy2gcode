@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <script>self["MonacoEnvironment"] = (function (paths) {
+          return {
+            globalAPI: false,
+            getWorkerUrl : function (moduleId, label) {
+              var result =  paths[label];
+              if (/^((http:)|(https:)|(file:)|(\/\/))/.test(result)) {
+                var currentUrl = String(window.location);
+                var currentOrigin = currentUrl.substr(0, currentUrl.length - window.location.hash.length - window.location.search.length - window.location.pathname.length);
+                if (result.substring(0, currentOrigin.length) !== currentOrigin) {
+                  var js = '/*' + label + '*/importScripts("' + result + '");';
+                  var blob = new Blob([js], { type: 'application/javascript' });
+                  return URL.createObjectURL(blob);
+                }
+              }
+              return result;
+            }
+          };
+        })({
+  "editorWorkerService": "/monacoeditorwork/editor.worker.bundle.js",
+  "css": "/monacoeditorwork/css.worker.bundle.js",
+  "html": "/monacoeditorwork/html.worker.bundle.js",
+  "json": "/monacoeditorwork/json.worker.bundle.js",
+  "typescript": "/monacoeditorwork/ts.worker.bundle.js",
+  "javascript": "/monacoeditorwork/ts.worker.bundle.js",
+  "less": "/monacoeditorwork/css.worker.bundle.js",
+  "scss": "/monacoeditorwork/css.worker.bundle.js",
+  "handlebars": "/monacoeditorwork/html.worker.bundle.js",
+  "razor": "/monacoeditorwork/html.worker.bundle.js"
+});</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turtletoy - Isometric Map</title>
+  <script type="module" crossorigin src="/assets/index-DyxIwyjF.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BRAUrvVB.css">
+</head>
+<body>
+    <header>
+        <h1>Turtletoy - Isometric Map s domy</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Levý sloupec: 2 bloky pod sebou (Canvas a GCODE) -->
+        <div class="column">
+            <div class="column-header">Canvas</div>
+            <div class="column-content">
+                <canvas id="canvas" width="800" height="800"></canvas>
+            </div>
+
+            <div class="column-header">GCODE Output</div>
+            <div class="column-content">
+                <div class="gcode-settings">
+                    <div class="settings-row">
+                        <label for="gcode-penup">Pen Up:</label>
+                        <input type="text" id="gcode-penup" value="M5">
+                    </div>
+                    <div class="settings-row">
+                        <label for="gcode-pendown">Pen Down:</label>
+                        <input type="text" id="gcode-pendown" value="M3">
+                    </div>
+                    <div class="settings-row">
+                        <label for="gcode-feedrate">Feed Rate:</label>
+                        <input type="number" id="gcode-feedrate" value="3000" min="1" step="100">
+                    </div>
+                    <div class="settings-row">
+                        <label for="gcode-scale">Scale (%):</label>
+                        <input type="number" id="gcode-scale" value="100" min="1" step="1">
+                    </div>
+                    <div class="settings-row-textarea">
+                        <label for="gcode-start">Start:</label>
+                        <textarea id="gcode-start" rows="3">G28</textarea>
+                    </div>
+                    <div class="settings-row-textarea">
+                        <label for="gcode-end">End:</label>
+                        <textarea id="gcode-end" rows="3">M2</textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="regenerate-gcode">Regenerovat GCODE</button>
+                        <button id="download-gcode">Stáhnout GCODE</button>
+                    </div>
+                </div>
+                <textarea id="gcode-output" readonly placeholder="GCODE se zde zobrazí po dokončení vykreslování..."></textarea>
+            </div>
+        </div>
+
+        <!-- Pravý sloupec: rozšířený editor (2/3 šířky) -->
+        <div class="column">
+            <div class="column-header">
+                Zdrojový kód (toy.js)
+                <button id="redraw-button" class="header-button">Překreslit</button>
+            </div>
+            <div class="column-content" style="padding: 0;">
+                <div id="monaco-editor"></div>
+            </div>
+        </div>
+    </div>
+
+        <!-- App (bundled by Vite) -->
+</body>
+</html>
