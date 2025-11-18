@@ -11,4 +11,13 @@ export default defineConfig({
       features: ['!accessibilityHelp'],
     }),
   ],
+  publicDir: 'public',
+  build: {
+    rollupOptions: {
+      input: {
+        main: './index.html',
+      },
+    },
+    copyPublicDir: true,
+  },
 });

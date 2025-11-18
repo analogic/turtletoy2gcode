@@ -61,23 +61,6 @@ npm run preview
 - **Scale**: Output size as percentage (100% ≈ 200mm)
 - **Start/End**: Custom initialization and cleanup commands
 
-## Deployment
-
-### Netlify
-```bash
-npm run build
-# Then drag the dist/ folder to netlify.com
-```
-
-### Vercel
-```bash
-npm install -g vercel
-vercel --prod
-```
-
-### GitHub Pages
-Push to GitHub and enable Pages in repository settings with the workflow provided in `.github/workflows/deploy.yml`.
-
 ## License
 
 ISC

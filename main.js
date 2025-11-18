@@ -10,7 +10,7 @@ import 'monaco-editor/esm/vs/language/typescript/monaco.contribution';
 // Wait for Monaco Editor to be ready
 window.addEventListener('load', async () => {
     // Import toy.js and run it
-    const response = await fetch('toy.js');
+    const response = await fetch('./toy.js');
     const originalCode = await response.text();
     
     // Load code from localStorage or use original
