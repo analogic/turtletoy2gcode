@@ -1,0 +1,22 @@
+{
+  "name": "turtletoy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "toy.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "monaco-editor": "^0.54.0",
+    "turtletoy": "^1.0.3"
+  },
+  "devDependencies": {
+    "vite": "^7.2.2",
+    "vite-plugin-monaco-editor": "^1.1.0"
+  }
+}

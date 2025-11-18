@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turtletoy to GCODE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-3 d-flex flex-column border-end bg-white">
+                <!-- Canvas section -->
+                <div class="border-bottom">
+                    <div style="height: 3rem; line-height: 2rem;" class="bg-light border-bottom p-2">
+                        <strong>Canvas</strong>
+                    </div>
+                    <div class="p-3">
+                        <canvas id="canvas" width="1024" height="1024" class="img-fluid border"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right column: 2/3 width, Monaco editor -->
+            <div class="col-12 col-lg-6 d-flex flex-column bg-white" style="height: calc(100vh - 60px);">
+                <div style="height: 3rem; line-height: 2rem;" class="bg-light border-bottom p-2 d-flex justify-content-between align-items-center">
+                    <strong>Source Code (toy.js)</strong>
+                    <button id="redraw-button" class="btn btn-primary btn-sm">Redraw</button>
+                </div>
+                <div class="flex-fill" style="overflow: hidden;">
+                    <div id="monaco-editor" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-3 d-flex flex-column border-start bg-white">
+                <!-- GCODE Output section -->
+                <div class="flex-fill d-flex flex-column">
+                    <div style="height: 3rem; line-height: 2rem;" class="bg-light border-bottom p-2">
+                        <strong>GCODE Output</strong>
+                    </div>
+                    <div class="p-3 flex-fill d-flex flex-column">
+                        <div class="card border mb-2">
+                            <div class="card-body p-2">
+                                <div class="mb-2">
+                                    <label for="gcode-penup" class="form-label small mb-1">Pen Up:</label>
+                                    <input type="text" class="form-control form-control-sm" id="gcode-penup" value="M5">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="gcode-pendown" class="form-label small mb-1">Pen Down:</label>
+                                    <input type="text" class="form-control form-control-sm" id="gcode-pendown" value="M3">
+                                </div>
+                                <div class="mb-2">
+                                    <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="gcode-feedrate" class="form-label small mb-1">Feed Rate:</label>
+                                        <input type="number" class="form-control form-control-sm" id="gcode-feedrate" value="3000" min="1" step="100">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="gcode-scale" class="form-label small mb-1">Scale (%):</label>
+                                        <input type="number" class="form-control form-control-sm" id="gcode-scale" value="100" min="1" step="1">    
+                                    </div>
+                                    </div>  
+                                </div>
+
+                                <div class="mb-2">
+                                    <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="gcode-start" class="form-label small mb-1">Start:</label>
+                                        <textarea class="form-control form-control-sm" id="gcode-start" rows="3">G28</textarea>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="gcode-end" class="form-label small mb-1">End:</label>
+                                        <textarea class="form-control form-control-sm" id="gcode-end" rows="3">M2</textarea>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2 text-center">
+                                    <button id="regenerate-gcode" class="btn btn-primary btn-sm">Regenerate GCODE</button>
+                                    <button id="download-gcode" class="btn btn-success btn-sm">Download GCODE</button>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea id="gcode-output" class="form-control flex-fill font-monospace" readonly placeholder="GCODE will appear here after rendering..." style="resize: none; min-height: 200px;"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+        <!-- App (bundled by Vite) -->
+        <script type="module" src="./main.js"></script>
+</body>
+</html>
